@@ -1,0 +1,223 @@
+<div class="row">
+  <div class="flex align-items-center justify-content-center">
+    <div class="col-7">
+      <div
+        class="hola surface-section col-12 w-full justify-content-center align-items-center text-center"
+      >
+        <div class="m-5">
+          <div class="justify-content-center align-items-center text-center">
+            <img src="assets/images/LOGO-SNO.png" alt="Image" height="140" />
+            <div class="text-800 mt-2 text-2xl font-medium text-center">
+              ¡Hazte miembro de la comunidad SNÖ!
+            </div>
+          </div>
+
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="flex">
+              <div class="col-6">
+                <label class="block text-900 flex align-items-start font-medium"
+                  >Nombre</label
+                >
+                <input
+                  type="text"
+                  placeholder="Nombre"
+                  class="p-inputtext p-component p-element w-full mb-1"
+                  formControlName="first_name"
+                  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s-]+"
+                  (keypress)="onKeyDownUser($event)"
+                />
+
+                @if (isValidField("first_name")) {
+                <span class="text-red-600 form-text">{{
+                  getErrorMessage("first_name")
+                }}</span>
+                }
+              </div>
+
+              <div class="col-6">
+                <label class="block text-900 flex align-items-start font-medium"
+                  >Apellido</label
+                >
+                <input
+                  type="text"
+                  placeholder="Apellido"
+                  class="p-inputtext p-component p-element w-full mb-1"
+                  formControlName="last_name"
+                  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*"
+                  (keypress)="onKeyDownUser($event)"
+                />
+
+                @if (isValidField("last_name")) {
+                <span class="text-red-600 form-text">{{
+                  getErrorMessage("last_name")
+                }}</span>
+                }
+              </div>
+            </div>
+
+            <div class="flex">
+              <div class="col-7">
+                <label class="block text-900 flex align-items-start font-medium"
+                  >Correo electrónico</label
+                >
+                <input
+                  type="text"
+                  placeholder="Correo electrónico"
+                  class="p-inputtext p-component p-element w-full mb-1"
+                  formControlName="email"
+                />
+
+                @if (isValidField("email")) {
+                <span class="text-red-600 form-text">{{
+                  getErrorMessage("email")
+                }}</span>
+                }
+              </div>
+
+              <div class="col-5">
+                <label class="block text-900 flex align-items-start font-medium"
+                  >Nombre de usuario</label
+                >
+                <input
+                  type="text"
+                  placeholder="Nombre de usuario"
+                  class="p-inputtext p-component p-element w-full mb-1"
+                  formControlName="username"
+                  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*"
+                  (keypress)="onKeyDownUsername($event)"
+                />
+
+                @if (isValidField("username")) {
+                <span class="text-red-600 form-text">{{
+                  getErrorMessage("username")
+                }}</span>
+                }
+              </div>
+            </div>
+
+            <div class="flex">
+              <div class="col-6">
+                <label class="text-900 flex align-items-center font-medium"
+                  >Contraseña</label
+                >
+                <div class="justify-content-center">
+                  <p-password
+                    (keypress)="onKeyDownPassword($event)"
+                    formControlName="password"
+                    [(ngModel)]="repeatValue"
+                    [toggleMask]="true"
+                  >
+                    <ng-template pTemplate="header">
+                      <p>Escoge una contraseña</p>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                      <p-divider />
+                      <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                        <li>Una mayúscula</li>
+                        <li>Una minúscula</li>
+                        <li>Un carácter numérico</li>
+                        <li>Un carácter . + * ! $ # ?</li>
+                        <li>Mínimo 8 carácteres</li>
+                      </ul>
+                    </ng-template>
+                  </p-password>
+                </div>
+                @if (isValidField("password")) {
+                <span class="text-red-600 form-text">{{
+                  getErrorMessage("password")
+                }}</span>
+                }
+              </div>
+
+              <div class="col-6">
+                <label
+                  class="block text-900 flex align-items-center font-medium"
+                  >Contraseña</label
+                >
+                <div class="justify-content-center">
+                  <p-password
+                    (keypress)="onKeyDownPassword($event)"
+                    formControlName="confirmPassword"
+                    [(ngModel)]="value"
+                    [toggleMask]="true"
+                  >
+                    <ng-template pTemplate="header">
+                      <p>Escoge una contraseña</p>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                      <p-divider />
+                      <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                        <li>Una mayúscula</li>
+                        <li>Una minúscula</li>
+                        <li>Un carácter numérico</li>
+                        <li>Un carácter . + * ! $ # ?</li>
+                        <li>Mínimo 8 carácteres</li>
+                      </ul>
+                    </ng-template>
+                  </p-password>
+                </div>
+                @if (isValidField("confirmPassword")) {
+                <span class="text-red-600 form-text">{{
+                  getErrorMessage("confirmPassword")
+                }}</span>
+                }
+              </div>
+            </div>
+
+            <div class="flex">
+              <div class="col-8">
+                <label class="block text-900 flex align-items-start font-medium"
+                  >Dirección</label
+                >
+                <input
+                  type="text"
+                  placeholder="Dirección"
+                  class="p-inputtext p-component p-element w-full mb-1"
+                  formControlName="direccion"
+                />
+
+                @if (isValidField("direccion")) {
+                <span class="text-red-600 form-text">{{
+                  getErrorMessage("direccion")
+                }}</span>
+                }
+              </div>
+
+              <div class="col-4">
+                <label class="block text-900 flex align-items-start font-medium"
+                  >Teléfono</label
+                >
+                <input
+                  placeholder="Número de teléfono"
+                  class="p-inputtext p-component p-element w-full mb-1"
+                  formControlName="numeroTelefono"
+                  (keypress)="onKeyDownNumber($event)"
+                />
+
+                @if (isValidField("numeroTelefono")) {
+                <span class="text-red-600 form-text">{{
+                  getErrorMessage("numeroTelefono")
+                }}</span>
+                }
+              </div>
+            </div>
+
+            <div class="flex">
+              <div class="col-12">
+                <button
+                  pButton
+                  pRipple
+                  label="Registrarse"
+                  icon="pi pi-user"
+                  class="flex lg:px-4 mr-1 p-3 lg:py-3 w-full justify-content-center align-items-center border-none hover:text-white font-medium border-round"
+                  [loading]="isLoading()"
+                ></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p-toast></p-toast>

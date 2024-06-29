@@ -1,0 +1,163 @@
+<nav #nav class="sticky-nav shadow-6 sidebar">
+  <div class="nav-bar2">
+    <div
+      class="bg-wihte py-2 px-3  flex align-items-center justify-content-between relative lg:static"
+      style="min-height: 84px; max-width: 100%"
+    >
+      <a
+        pripple=""
+        pstyleclass="@next"
+        enterclass="hidden"
+        leavetoclass="hidden"
+        class="p-ripple p-element hh cursor-pointer block lg:hidden"
+        ><i class="pi pi-bars icon text-4xl "
+        (click)="openSidebar(nav)"></i><span class="p-ink"></span
+      ></a>
+
+
+      <div class="sidebar1">
+        <div class="logo1">
+          <i class="pi pi-times menu-icon-close mt-4 mr-1" (click)="closeSidebar(nav)"></i>
+        </div>
+
+        <div class="sidebar-content">
+          <ul class="lists">
+
+            @for (route of routes1; track route.name) {
+              <li class="list" (click)="closeSidebar(nav)">
+                <a [routerLink]="route.routerLink" class="nav-link">
+                  <i class="{{route.icon}} icon"></i>
+                  <span class="link">{{route.name}}</span>
+                </a>
+              </li>
+            }
+          </ul>
+
+          <div class="bottom-content">
+            <li class="list">
+              <a routerLink="/auth/login" (click)="logOut()" class="nav-link">
+                <i class="pi pi-sign-out icon"></i>
+                <span class="link">Logout </span>
+              </a>
+            </li>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="align-items-center
+        flex-grow-1
+        justify-content-between
+        hidden lg:flex
+        absolute
+        lg:static
+        w-full left-0
+        top-100 z-1
+        shadow-2
+        lg:shadow-none
+        border-1 lg:border-none
+        border-gray-800"
+      >
+        <ul
+          class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row"
+        >
+        <div>
+            <a
+            [routerLink]="['/pages/home']"
+            class="flex lg:px-4 mr-1 align-items-center bg-white border-none font-medium border-round"
+            style="cursor: pointer; display: inline-block; height: 80px;"
+          >
+            <img src="assets/images/LOGO-SNO.png" alt="Image" height="100%" width="auto" class="object-contain" />
+            <span class="nav-link"></span>
+          </a>
+
+        </div>
+
+
+          <p-dropdown
+          class="responsive-nav mi-dropdown"
+            id="mi-dropdown"
+            placeholder="CATEGORÍA"
+            [options]="labelValue"
+            [loading]="isLoading()"
+            optionLabel="label"
+            [(ngModel)]="selectedCategory"
+            (onChange)="onCategoryChange($event.value)"
+            styleClass="flex
+            lg:px-2 mr-1
+            align-items-center
+            bg-white
+            hover:bg-gray-200
+            border-none
+            font-medium
+            border-round"
+            ><i class="pi pi-map-marker mr-2"></i>
+          </p-dropdown>
+
+          <p-button
+          [routerLink]="['/pages/sedes']"
+          class="responsive-nav"
+            styleClass="flex
+            lg:px-4 mr-1
+            align-items-center
+            bg-white
+            hover:bg-gray-200
+            border-none
+            font-medium
+            border-round"
+            ><i class="button pi pi-map-marker mr-2"></i><span class="nav link">SEDES</span>
+          </p-button>
+        </ul>
+
+
+        <div class="flex">
+
+          <ng-container *ngIf="tokenService.getToken(); else notLoggedIn">
+            <span class="flex nav align-items-center justify-content-center mr-5">¡Hola <span class="span">, {{  userId.nombre }}!</span></span>
+            <p-button
+              [loading]="isLoading()"
+              icon="pi pi-sign-out"
+              class="responsive-nav"
+              (click)="logout()"
+              styleClass="flex
+                mt-3
+                align-items-center
+                bg-red-500
+                border-none
+                hover:bg-red-600
+                font-medium
+                border-round"
+            ><span class="nav1 link"></span>
+            </p-button>
+          </ng-container>
+          <ng-template #notLoggedIn>
+            @for (route of routes; track route.name) {
+            <button
+              pButton
+              pRipple
+              icon="pi pi-sign-in mr-2"
+              class="
+              flex
+              m-3
+              align-items-center
+              border-none
+              font-medium
+              responsive-nav border-round inicio"
+              [routerLink]="route.routerLink"
+              [loading]="isLoading()"
+
+            ><span class="nav1 link">{{ route.name }}</span>
+            </button>
+            }
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <app-cart class="flex justify-content-end "></app-cart>
+  </div>
+</nav>
+
+
+
+
+<section class="overlay1" (click)="closeSidebar(nav)"></section>

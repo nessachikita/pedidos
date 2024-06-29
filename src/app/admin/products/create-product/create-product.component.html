@@ -1,0 +1,107 @@
+<form [formGroup]="createProductForm" (ngSubmit)="onSubmit()">
+  <div class="grid">
+    <div class="col-6">
+      <input
+      pInputText
+        class="w-full"
+        placeholder="Nombre del producto"
+        formControlName="nombre"
+      />
+    </div>
+
+    <div class="col-6">
+      <input
+        class="w-full"
+        pInputText
+        placeholder="Precio"
+        formControlName="precio"
+        type="number"
+        min="0"
+      />
+    </div>
+
+  </div>
+
+  <div class="grid">
+    <div class="col-12">
+      <input
+        class="w-full"
+        pInputText
+        placeholder="Descripción"
+        formControlName="descripcion"
+      />
+    </div>
+
+    <div class="col-4">
+      <input
+        class="w-full"
+        pInputText
+        placeholder="Cantidad"
+        formControlName="cantidad"
+        type="number"
+        min="0"
+      />
+    </div>
+
+    <div class="col-4">
+      <p-dropdown
+        [options]="categorias"
+        optionLabel="nombre"
+        styleClass="w-full"
+        placeholder="Categoría"
+        formControlName="id_categoria">
+      </p-dropdown>
+    </div>
+
+    <div class="col-4">
+      <p-dropdown
+      [options]="tipos"
+      optionLabel="nombre"
+      styleClass="w-full"
+      placeholder="Tipo"
+      formControlName="id_tipo"
+      [readonly]="tipodeshabilitado">
+    </p-dropdown>
+    </div>
+  </div>
+
+
+<div class="col-12">
+    <div class="card flex justify-content-center">
+      <p-toast />
+      <p-fileUpload
+          formControlName="imagen"
+          [multiple]="false"
+          accept="image/*"
+          chooseLabel="Escoger"
+          [showUploadButton]="false"
+          [showCancelButton]="false"
+          maxFileSize="1000000">
+              <ng-template pTemplate="content">
+                  <ul *ngIf="uploadedFiles.length">
+                      <li *ngFor="let file of uploadedFiles">
+                          {{ file.name }} - {{ file.size }} bytes
+                      </li>
+                  </ul>
+              </ng-template>
+      </p-fileUpload>
+  </div>
+</div>
+
+<div class="flex justify-content-center">
+  <button
+        (onclick)="onSubmit()"
+        pButton
+        pRipple
+        icon="pi pi-send"
+        class="button
+        lg:px-4 lg:py-2
+        border-none
+        font-medium border-round"
+        label="Enviar"
+        [loading]="isLoading()"
+  ></button>
+</div>
+</form>
+
+

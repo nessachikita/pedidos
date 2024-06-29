@@ -1,0 +1,45 @@
+<nav #nav>
+  <div class="logo shadow-6 w-full">
+    <i class="pi pi-bars menu-icon ml-4" (click)="openSidebar(nav)"></i>
+    <img
+    [routerLink]="['/home-admin']"
+    style="height: 80px"
+    src="assets/images/LOGO-SNO.png"
+    alt="">
+  </div>
+
+  <div class="sidebar">
+    <div class="logo">
+      <i class="pi pi-times menu-icon-close mt-4 ml-4 mr-1" (click)="closeSidebar(nav)"></i>
+    </div>
+
+    <div class="sidebar-content">
+      <ul class="lists">
+
+        @for (route of routes; track route.name) {
+          <li class="list" (click)="closeSidebar(nav)">
+            <a [routerLink]="route.routerLink" class="nav-link">
+              <i class="{{route.icon}} icon"></i>
+              <span class="link">{{route.name}}</span>
+            </a>
+          </li>
+        }
+      </ul>
+
+      <div class="bottom-content">
+        <li class="list">
+          <a routerLink="/auth/login" (click)="logOut()" class="nav-link">
+            <i class="pi pi-sign-out icon"></i>
+            <span class="link">Logout </span>
+          </a>
+        </li>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="content">
+  <router-outlet></router-outlet>
+</section>
+
+<section class="overlay" (click)="closeSidebar(nav)"></section>

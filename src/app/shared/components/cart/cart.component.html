@@ -1,0 +1,67 @@
+<nav #nav>
+  <div class="logo">
+    <i class="hover:bg-gray-200 border-round pi pi-cart-plus menu-icon" (click)="openSidebar(nav)"></i>
+  </div>
+
+  <div class="sidebar">
+    <div class="logo">
+      <i class="pi pi-times menu-icon-close" (click)="closeSidebar(nav)"></i>
+    </div>
+
+    <p-scrollPanel [style]="{ width: '100%', height: '80vh' }">
+      <div class="bg-white">
+        <div class="row"  *ngFor="let product of cartProducts; let i = index">
+          <div class="col-6 d-flex align-items-center ">
+            <div class="col-3 ml-2 align-items-center">
+              <p-button
+              icon="pi pi-trash"
+              [style]="{'width': '30px', 'height': '30px',
+              'background-color': '#11ABE1', 'border': 'none',}"
+              styleClass="border-round" (click)="clearCartById(i)">
+              </p-button>
+            </div>
+            <div class="col-9 align-items-center p-0 m-0">
+              <img class="ml-3" [src]="product.imagen" style="width: 110px; height: 110px;">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="ml-3">
+              <h5>{{product.nombre}}</h5>
+            <p id="precio" class="mb-1"> <b>{{product.cantidad}}x{{product.precio/product.cantidad | number:'1.2-2'}}$</b></p>
+            <p class="mb-1">Tamaño: {{product.tamanos[0].nombre}}</p>
+            <p class="mb-1">Topping: {{product.toppings[0].nombre}}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid empty-cart-message-container" *ngIf="cartProducts.length === 0">
+          <p class="empty-cart-message col-12">
+            Parece que aún no has agregado nada a tu carrito
+          </p>
+          <img class="" src="assets/images/sno-triste.png">
+        </div>
+      </div>
+    </p-scrollPanel>
+
+    <div *ngIf="cartProducts.length > 0">
+      <h4 class="text-end">
+        Total: {{totalProducts}}$
+      </h4>
+    </div>
+
+
+      <p-button
+    [style]="{'background-color': '#11ABE1', 'border': 'none',}"
+    (click)="buyNow()" styleClass="flex col-12
+    align-items-center
+    text-white
+    border-round
+    m-3
+    justify-content-center " *ngIf="cartProducts.length > 0">Comprar ahora</p-button>
+
+  </div>
+</nav>
+
+<section class="overlay" (click)="closeSidebar(nav)"></section>
+
+<p-toast></p-toast>

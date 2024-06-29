@@ -1,0 +1,136 @@
+<form [formGroup]="updateProductForm" (ngSubmit)="onSubmit()">
+  <div class="grid">
+    <div class="col-6">
+      <input
+        pInputText
+        class="w-full"
+        placeholder="Nombre del producto"
+        formControlName="nombre"
+        [(ngModel)]="product.nombre"
+      />
+    </div>
+
+    <div class="col-6">
+      <input
+        class="w-full"
+        pInputText
+        placeholder="Precio"
+        formControlName="precio"
+        type="number"
+        min="0"
+        [(ngModel)]="product.precio"
+      />
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="col-12">
+      <input
+        class="w-full"
+        pInputText
+        placeholder="Descripción"
+        formControlName="descripcion"
+        [(ngModel)]="product.descripcion"
+      />
+    </div>
+
+    <div class="col-4">
+      <input
+        class="w-full"
+        pInputText
+        placeholder="Cantidad"
+        formControlName="cantidad"
+        type="number"
+        min="0"
+        [(ngModel)]="product.cantidad"
+      />
+    </div>
+
+    <div class="col-4">
+      <p-dropdown
+        [options]="categorias | async"
+        optionLabel="nombre"
+        styleClass="w-full"
+        placeholder="Categoría"
+        formControlName="id_categoria"
+        [(ngModel)]="selectedCategoria"
+      >
+      </p-dropdown>
+    </div>
+
+    <div class="col-4">
+      <p-dropdown
+        [options]="tipos | async"
+        optionLabel="nombre"
+        styleClass="w-full"
+        placeholder="Tipo"
+        formControlName="id_tipo"
+        [(ngModel)]="selectedTipo"
+        [readonly]="tipodesactivado"
+      />
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="card flex justify-content-center">
+      <p-fileUpload
+        type="file"
+        [multiple]="false"
+        accept="image/*"
+        chooseLabel="Escoger"
+        [showUploadButton]="false"
+        [showCancelButton]="false"
+        maxFileSize="1000000"
+        class="w-full"
+        placeholder="Upload Image"
+        formControlName="imagen"
+        (change)="imagenSeleccionada($event)"
+      >
+        <ng-template pTemplate="content">
+          <ul *ngIf="uploadedFiles.length">
+            <li *ngFor="let file of uploadedFiles">
+              {{ file.name }} - {{ file.size }} bytes
+            </li>
+          </ul>
+        </ng-template>
+      </p-fileUpload>
+      <img
+        [src]="imagePreview"
+        *ngIf="imagePreview"
+        class="image-preview width"
+        style="
+          display: flex;
+          align-items: center;
+          border-radius: 50px;
+          width: 80px;
+          height: 80px;
+        "
+      />
+    </div>
+  </div>
+
+  <div class="flex justify-content-center">
+    <div class="col-6 flex justify-content-end">
+      <button
+      (click)="eliminar()"
+      pButton
+      pRipple
+      icon="pi pi-trash"
+      class="button mr-2 border-none font-medium border-round"
+      label="Eliminar"
+    ></button>
+    </div>
+
+    <div class="col-6 flex justify-content-start">
+      <button
+      (onclick)="onSubmit()"
+      pButton
+      pRipple
+      icon="pi pi-send"
+      class="button1 ml-2 border-none font-medium border-round"
+      label="Enviar"
+      [loading]="isLoading()"
+    ></button>
+    </div>
+  </div>
+</form>

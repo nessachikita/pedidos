@@ -1,0 +1,95 @@
+<div class="block section">
+  <div class="ng-start-inserted">
+    <div class="flex">
+      <div class="surface-section col-12 w-full md:w-6 p-6 md:p-8">
+        <div class="mb-5 justify-content-center align-items-center text-center">
+          <img
+            src="assets/images/LOGO-SNO.png"
+            alt="Image"
+            height="240"
+            class="mb-3"
+          />
+          <div class="text-800 text-2xl font-medium mb-3 text-center">
+            ¡Bienvenido de nuevo!
+          </div>
+          <div class="text-center">
+            <span class="text-600 text-center font-medium mr-2"
+              >¿No posees una cuenta?</span
+            ><a
+            [routerLink]="['/auth/create-user']"
+            class="font-medium no-underline text-red-600 cursor-pointer"
+              >¡Créala ahora!</a
+            >
+          </div>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <label for="email1" class="block text-900 font-medium mb-2">Usuario</label>
+          <input
+            id="email1"
+            type="text"
+            placeholder="Nombre de usuario"
+            class="p-inputtext p-component p-element w-full mb-2 p-3"
+            formControlName="username"
+          />
+
+          @if (isValidField("username")) {
+          <div class="mb-1">
+            <span class="text-red-600 form-text">{{ getErrorMessage("username") }}</span>
+          </div>
+          }
+
+          <label for="password1" class="block text-900 font-medium mb-2"
+            >Contraseña</label
+          >
+          <input
+            id="password1"
+            type="password"
+            placeholder="Contraseña"
+            pInputText
+            class="p-inputtext p-component p-element w-full mb-2 p-3"
+            formControlName="password"
+          />
+
+          @if (isValidField("password")) {
+          <span class="text-red-600 form-text">{{
+            getErrorMessage("password")
+          }}</span>
+          }
+
+          <div class="flex align-items-center justify-content-center mb-6">
+            <a
+            (click)="showForget()"
+              class="font-medium no-underline text-blue-400 flex text-center  cursor-pointer"
+              >¿Olvidaste tu contraseña?</a
+            >
+          </div>
+
+          <button
+            pButton
+            pRipple
+            label="Iniciar sesión"
+            icon="pi pi-user"
+            class="flex
+              lg:px-4 mr-1
+              p-3 lg:py-3
+              w-full
+              justify-content-center
+              align-items-center
+              border-none
+              hover:text-white
+              font-medium
+              border-round"
+            [disabled]="loginForm.invalid"
+            [loading]="isLoading()"
+          ></button>
+        </form>
+      </div>
+      <div class="images">
+        <img id="cat" class= "img-fluid" src="assets/images/sno-inicio.jpg" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-toast></p-toast>

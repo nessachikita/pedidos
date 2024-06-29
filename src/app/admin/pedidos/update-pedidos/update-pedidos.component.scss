@@ -1,0 +1,40 @@
+.p > span {
+  font-weight: normal;
+}
+
+.p {
+  font-weight: bold;
+}
+
+h5{
+  font-weight: bold;
+}
+
+h3{
+  font-weight: bold;
+}
+
+.button{
+  background-color: #E8434B;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover{
+  border: none;
+  background-color: #d32d36;
+}
+
+.button1{
+  background-color: #11ABE1;
+}
+
+.button1:hover{
+  background-color: #0d9dd1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

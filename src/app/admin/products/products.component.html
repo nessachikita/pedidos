@@ -1,0 +1,120 @@
+<ng-container class="mt-8"
+*ngIf="{
+  products: products$ | async
+} as state"
+>
+  <p-toolbar>
+    <div class="p-toolbar-group-start mt-8 ">
+      <h3 class="mt-2">Productos</h3>
+    </div>
+
+    <div class="mt-8">
+      <button
+      class="
+            flex
+            lg:px-4 mr-1
+            align-items-center
+            border-none
+            font-medium
+            border-round"
+        pButton
+        icon="pi pi-plus"
+        label="Añadir un producto"
+        (click)="showProductCreation()"
+      ></button>
+    </div>
+  </p-toolbar>
+
+
+  <p-table
+    #dt1
+    [value]="state.products"
+    [loading]="isLoading()"
+    dataKey="id"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [globalFilterFields]="['nombre', 'id_producto', 'precio', 'id_categoria']"
+    styleClass="ml-3 mr-3"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex">
+        <span class="p-input-icon-left ml-auto">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="dt1.filterGlobal($event.target['value'], 'contains')"
+            placeholder="Buscar"
+          />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="min-width: 8rem">
+            ID Producto
+        </th>
+        <th style="min-width: 10rem">
+          Nombre
+        </th>
+
+        <th style="min-width: 10rem">
+          Imagen
+        </th>
+
+        <th style="min-width: 10rem">
+          Precio
+        </th>
+
+        <th style="min-width: 10rem">
+            Categoría
+        </th>
+
+        <th style="min-width: 10rem" class="text-center">
+         Opciones
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-products>
+      <tr>
+        <td>
+          {{ products.id_producto }}
+        </td>
+        <td>
+          {{ products.nombre }}
+        </td>
+        <td>
+          <img
+          [src]="products.imagen"
+          alt="Product Image"
+          style="width:70px; height:70px; border-radius: 50px;">
+        </td>
+        <td>
+          {{ products.precio }}$
+        </td>
+        <td>
+          {{ products.categoryName }}
+        </td>
+
+        <td class="text-center">
+          <p-button
+            [style]="
+            {'border-radius': '50px','background-color': '#11ABE1', 'border': 'none'}"
+            icon="pi pi-pencil"
+            (click) = "showProductUpdate(products)"
+          ></p-button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="7">No elementos encontrados.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-container>
+
+<p-toast></p-toast>

@@ -1,0 +1,22 @@
+.images {
+  display: flex;
+}
+
+#image{
+  align-items: center;
+}
+
+
+#cat {
+  width: auto;
+  height: 100vh;
+  object-fit: cover;
+}
+
+button{
+  background-color: #E8434B;
+}
+
+button:hover{
+  background-color: #c7373e;
+}

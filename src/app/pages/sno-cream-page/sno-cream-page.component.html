@@ -1,0 +1,43 @@
+<app-nav-bar></app-nav-bar>
+
+<ng-container *ngIf="{
+  products: products$ | async
+} as state"
+>
+
+<div class="container-fluid mt-5">
+  <div class="row" id="fff">
+    @for (product of state.products;  let i = $index; track i){
+    <div id="col" class="col-12 md:col-6 lg:col-3">
+      <div class="card">
+        <div class="element-active flex align-items-center justify-content-center">
+          <img [src]="product.imagen"
+          [style]="{ width: '200px', height: '200px'}"
+           >
+          <div class="intro">
+            <h2 class="text-center mb-2">{{product.nombre}}</h2>
+            <p class="text-center mb-2">{{product.descripcion}} </p>
+            <p id="precio" class="text-center mb-4"> <B>${{product.precio}}</B></p>
+            <p-button
+            [style]="{ 'background-color': '#E8434B', 'border': 'none' }"
+            (onClick)="show(product.id_producto)"
+            icon="pi pi-cart-plus"
+            label="Agregar al carrito"
+            styleClass="flex
+                  lg:px-4
+                  w-full
+                  p-3
+                  align-items-center
+                  border-none
+                  hover:text-white
+                  hover:bg-red-700
+                  font-medium
+                  border-round" />
+          </div>
+        </div>
+        </div>
+      </div>
+    }
+    </div>
+</div>
+</ng-container>

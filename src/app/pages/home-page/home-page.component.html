@@ -1,0 +1,82 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="row">
+  <div class="col-12">
+    <h1 class="uno flex mt-4 mb-4 pr-2 align-items-center justify-content-center">
+      ¡Tu momento <span class="span mx-3"> dulce </span>del día!</h1>
+  </div>
+
+<app-carousel></app-carousel>
+
+
+
+
+<div class="row">
+    <div class="col-6">
+      <h1 class="uno flex mt-8 mb-8 pr-2 align-items-center justify-content-end">
+        NUESTROS </h1>
+    </div>
+    <div class="col-6">
+      <h1 class="dos flex mt-8 mb-8 pl-2 align-items-center justify-content-start">
+        SABORES</h1>
+    </div>
+
+
+    <div *ngFor="let cepillado of cepillados" class="lg:col-4 md:col-6 sm:col-12 flex justify-content-center align-items-center">
+      <div class="image mb-7" style="display: flex; justify-content: center; align-items: center;">
+        <img [src]="cepillado.src" [alt]="cepillado.alt" width="250" preview="false" (click)="addToCart(cepillado.id)" />
+      </div>
+    </div>
+  </div>
+
+
+      <div class="col-12 flex align-items-center justify-content-center">
+        <div class="button mt-8 mb-8">
+          @for (route of routesproduct; track route.name) {
+          <p-button
+            [style]="{ 'background-color': '#E8434B', 'border': 'none' }"
+            [routerLink]="route.routerLink"
+            [loading]="isLoading()"
+            styleClass="flex
+            lg:px-4 mr-1
+            align-items-center
+            justify-content-center
+            border-round
+            font-medium"
+      ><span class="nav1 link">{{ route.name }}</span>
+      </p-button>
+      }
+      </div>
+    </div>
+
+    <div class="row" id="footer">
+      <div class="col-lg-4 col-md-4 col-sm-12 pt-4 pb-4">
+        <div class="text-center text-white p-3 ">
+          <h5 class="font-bold">Nosotros</h5>
+          <p>¿Quiénes somos?</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12 pt-4 pb-4">
+        <div class="text-center text-white p-3 ">
+          <h5 class="font-bold">Ayuda</h5>
+          <p>Preguntas Frecuentes</p>
+          <p>Formas de Pago</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12 pt-4 pb-4">
+        <div class="text-center text-white p-3 ">
+          <h5 class="font-bold">Política</h5>
+          <p>Política de privacidad y Seguridad</p>
+          <p>Derechos legales</p>
+          <p>Devoluciones y Reembolsos</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="text-center bg-gray-400 text-white p-3 ">
+          <p>Todos los derechos reservados, 2024.</p>
+        </div>
+      </div>
+    </div>
+

@@ -1,0 +1,27 @@
+<div class="container mt-8">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 mb-4 mt-4" *ngFor="let reporte of reportes"> <!-- Cambio aplicado aquí -->
+      <p-card styleClass="shadow-lg" [header]="'Reporte ' + reporte.nombre">
+        <div class="d-flex">
+          <div class="mr-3" style="width:45%; height: 25%;">
+            <a class="image-link">
+              <i class="pi pi-file-pdf mr-2 ml-2" style="color: rgb(46, 45, 45); font-size: 120px"></i>
+            </a>
+          </div>
+          <div class="d-flex flex-column justify-content-between w-100">
+            <p>
+              Información referente al documento que se va a descargar a continuación.
+            </p>
+            <div class="d-flex justify-content-end">
+              <div class="col-12 d-flex justify-content-end">
+                <button pButton pRipple label="Descargar" class="border-round" (click)="reporte.accion()">
+                  <i class="pi pi-download mr-2"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </p-card>
+    </div>
+  </div>
+</div>

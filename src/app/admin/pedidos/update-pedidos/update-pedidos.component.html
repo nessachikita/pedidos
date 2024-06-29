@@ -1,0 +1,77 @@
+<ng-container *ngIf="detallesUsuario as usuario">
+  <div style="max-height: 200px; overflow-y: auto;">
+    <div>
+      <h5>
+        Datos del cliente
+      </h5>
+    </div>
+    <div>
+      Nombre: <span>{{usuario.first_name}} {{usuario.last_name}}</span>
+    </div>
+    <div>
+      Dirección: <span>{{usuario.direccion}}</span>
+    </div>
+    <div>
+      Email: <span>{{usuario.email}}</span>
+    </div>
+    <div>
+      Teléfono: <span>{{usuario.numeroTelefono}}</span>
+    </div>
+  </div>
+  <p-divider></p-divider>
+</ng-container>
+
+<ng-container *ngIf="detallesPedido as state">
+  <div>
+    <h5>
+      Detalles de los Productos
+    </h5>
+  </div>
+  <div *ngFor="let detalle of detallesPedido; let i = index" style="max-height: 200px; overflow-y: auto;">
+    <div>
+      <div>Producto #{{i + 1}}</div>
+      <div class="p">Nombre: <span>{{detalle.nombre}}</span></div>
+      <div class="p">Precio: <span>{{detalle.subtotal | number:'1.2-2'}}</span></div>
+      <div class="p mb-3">Cantidad: <span>{{detalle.cantidad}}</span></div>
+
+    </div>
+
+    <p-divider></p-divider>
+  </div>
+  <ng-container *ngIf="pedidoFiltrado$ | async as pedidoFiltrado">
+    <div>
+      <h3>Total: {{pedidoFiltrado.total | number:'1.2-2'}}</h3>
+    </div>
+
+    <div class="flex justify-content-center">
+      <div class="col-6 flex justify-content-end">
+        <button
+        *ngIf="pedidoFiltrado.estado !== 'Completado'"
+        (click)="eliminarPedido()"
+        pButton
+        pRipple
+        icon="pi pi-trash"
+        class="button mr-2 border-none font-medium border-round"
+        label="Eliminar"
+      ></button>
+      </div>
+
+      <div class="col-6 flex justify-content-start">
+        <button
+        *ngIf="pedidoFiltrado.estado !== 'Completado'"
+        (click)="enviarPedido()"
+        pButton
+        pRipple
+        icon="pi pi-check"
+        class="button1 ml-2 border-none font-medium border-round"
+        label="Completado"
+        [loading]="isLoading()"
+      ></button>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
+
+
+
+

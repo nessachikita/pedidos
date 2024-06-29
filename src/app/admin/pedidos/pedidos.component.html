@@ -1,0 +1,102 @@
+<ng-container class="mt-8"
+*ngIf="{
+  pedidos: pedidos$ | async
+} as state"
+>
+
+<p-toolbar>
+  <div class="p-toolbar-group-start mt-8 ">
+    <h3 class="mt-2">Pedidos</h3>
+  </div>
+
+</p-toolbar>
+
+<p-table
+    #dt1
+    [value]="state.pedidos"
+    [loading]="isLoading()"
+    dataKey="id"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [globalFilterFields]="['id_pedido', 'estado', 'fecha', 'hora', 'id_usuario', 'total']"
+    styleClass="ml-3 mr-3"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex">
+        <span class="p-input-icon-left ml-auto">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="dt1.filterGlobal($event.target['value'], 'contains')"
+            placeholder="Buscar"
+          />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="min-width: 8rem">
+            Fecha y Hora
+        </th>
+        <th style="min-width: 10rem">
+          ID Pedido
+        </th>
+
+        <th style="min-width: 10rem">
+          ID Usuario
+        </th>
+
+        <th style="min-width: 10rem">
+          Total
+        </th>
+
+        <th style="min-width: 10rem">
+          Estado
+        </th>
+
+        <th style="min-width: 10rem" class="text-center">
+         Opciones
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-pedidos>
+      <tr>
+        <td>
+          {{ pedidos.fecha }} {{pedidos.hora}}
+        </td>
+        <td>
+          {{ pedidos.id_pedido }}
+        </td>
+        <td>
+          {{ pedidos.id_usuario }}
+        </td>
+        <td>
+          {{ pedidos.total | number:'1.2-2'}}
+        </td>
+        <td>
+          {{ pedidos.estado }}
+        </td>
+
+        <td class="text-center">
+          <p-button
+            (onClick)="showPedido(pedidos)"
+            [style]="
+            {'border-radius': '50px','background-color': '#11ABE1', 'border': 'none'}"
+            icon="pi pi-pencil"
+          ></p-button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="7">No elementos encontrados.</td>
+      </tr>
+    </ng-template>
+</p-table>
+</ng-container>
+
+<p-toast></p-toast>

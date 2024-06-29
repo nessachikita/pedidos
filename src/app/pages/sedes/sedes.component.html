@@ -1,0 +1,50 @@
+<app-nav-bar></app-nav-bar>
+
+<ng-container *ngIf="{
+  sedes: sedes$ | async
+} as state"
+>
+
+<div class="container">
+    <div class="row">
+      @for (sede of state.sedes;  let i = $index; track i){
+        <div class="col-lg-6 col-md-12 mb-4 mt-4">
+            <p-card styleClass="shadow-lg" header="{{sede.nombre}}">
+                <div class="d-flex">
+                    <div class="mr-3" style="width:45%; height: 25%;">
+                        <a href="{{sede.ubicacion}}" target="_blank" class="image-link">
+                            <img
+                            style="width:100%; height: 100%"
+                            src="assets/images/LOGO-SNO.png" alt="" class="image">
+                            <div class="overlay">
+                                <i class="pi pi-map-marker icon"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="d-flex flex-column justify-content-between w-100">
+                        <p>
+                          {{sede.descripcion}}
+                        </p>
+                        <div class="d-flex justify-content-end">
+                            <div class="col-12 d-flex justify-content-end">
+                                <button
+                                pButton
+                                pRipple
+                                icon="pi pi-whatsapp"
+                                label = "Ir a WhatsApp"
+                                (click) = "exportCartToWhatsApp(sede.numeroTelefono)"
+                                class="border-round">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </p-card>
+        </div>
+      }
+      </div>
+  </div>
+</ng-container>
+
+
+

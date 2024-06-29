@@ -1,0 +1,89 @@
+<form [formGroup]="updateUserForm" (ngSubmit)="onSubmit()">
+  <div class="grid">
+    <div class="col-6">
+      <input
+        pInputText
+        class="w-full"
+        placeholder="Nombre"
+        formControlName="first_name"
+        [ngModel]="user.first_name"
+      />
+    </div>
+
+    <div class="col-6">
+      <input
+        class="w-full"
+        pInputText
+        placeholder="Apellido"
+        formControlName="last_name"
+        [ngModel]="user.last_name"
+      />
+    </div>
+
+    <div class="col-8">
+      <input
+        class="w-full"
+        pInputText
+        placeholder="Correo electrónico"
+        formControlName="email"
+        [ngModel]="user.email"
+      />
+    </div>
+
+    <div class="col-4">
+      <p-dropdown
+        placeholder="Staff"
+        [options]="selectedStaff"
+        optionLabel="nombre"
+        styleClass="w-full"
+        formControlName="is_staff"
+        [ngModel]="user.is_staff"
+      />
+    </div>
+
+    <div class="col-6">
+      <input
+        class="w-full"
+        pInputText
+        placeholder="Usuario"
+        formControlName="username"
+        [ngModel]="user.username"
+      />
+    </div>
+
+    <div class="col-6">
+      <input
+        class="w-full"
+        pInputText
+        placeholder="Teléfono"
+        formControlName="numeroTelefono"
+        [ngModel]="user.numeroTelefono"
+      />
+    </div>
+  </div>
+
+  <div class="flex justify-content-center">
+    <div class="col-6 flex justify-content-end">
+      <button
+      (click)="eliminar()"
+      pButton
+      pRipple
+      icon="pi pi-trash"
+      class="button mr-2 border-none font-medium border-round"
+      label="Eliminar"
+    ></button>
+    </div>
+
+    <div class="col-6 flex justify-content-start">
+      <button
+      (onclick)="onSubmit()"
+      pButton
+      pRipple
+      icon="pi pi-send"
+      class="button1 ml-2 border-none font-medium border-round"
+      label="Enviar"
+      [loading]="isLoading()"
+    ></button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,82 @@
+
+.container-fluid{
+  display: flex;
+}
+
+
+.element-active:hover img{
+  filter:brightness(65%);
+  transition: 0.3s;
+}
+
+
+
+.card{
+  padding: 5%;
+  height: 350px;
+  width: 240px;
+  box-shadow: 1px 1px 5px rgb(156, 156, 156);
+  overflow: hidden;
+}
+
+img{
+  height: 100%;
+  width: 100%;
+  transition: .5s;
+  border-radius: 3%;
+}
+.intro{
+  height: 35%;
+  width: 90%;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0px;
+  background: white;
+  color: black;
+  transition: .5s;
+}
+
+h2{
+  margin-top: 1px;
+  font-size: 25px;
+  color: rgb(65, 65, 65);
+}
+p{
+  font-size: 16px;
+  color: rgb(65, 65, 65);
+}
+
+.card:hover{
+  cursor:pointer;
+}
+.card:hover .intro{
+  height: 50%;
+  bottom: 8%;
+  background: white;
+}
+
+.intro:hover .for{
+  height: 50%;
+  bottom: 8%;
+  background: white;
+}
+
+
+#precio{
+  font-size: 20px;
+}
+#col{
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes ani{
+  0%{
+    bottom: 0px;
+  }
+  100%{
+    bottom: 50px;
+  }
+}

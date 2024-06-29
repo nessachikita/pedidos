@@ -1,0 +1,127 @@
+<ng-container *ngIf="product$ | async as product; else loading">
+  <div class="grid">
+    <div
+      class="col-12 lg:col-6 flex justify-content-center rounded-image-container"
+    >
+      <p-image
+        [src]="product.imagen"
+        alt="Image"
+        class="img-thumbnail img-fluid image"
+        [preview]="false"
+      ></p-image>
+    </div>
+
+    <div class="grid col-12 lg:col-6">
+      <div class="col-12 text-center" style="height: 300px">
+        <div>
+          <div
+            class="col-12 flex align-items-center text-xl font-medium text-900"
+          >
+            {{ product.descripcion }}
+          </div>
+          <div
+            class="flex align-items-center justify-content-between mb-2 mt-1"
+          >
+            <span class="text-900 font-medium text-3xl block"
+              >${{ cantidad.precio }}</span
+            >
+          </div>
+          <div
+            *ngIf="id_tamano"
+            class="flex align-items-center justify-content-between font-bold text-900 mb-2"
+          >
+            Toppings
+          </div>
+          <div class="col-12 flex align-items-center justify-content-between">
+<div *ngIf="id_tamano" class="flex flex-wrap gap-3">
+  <div
+    class="flex align-items-center"
+    *ngFor="let topping of toppingsdepurados"
+  >
+    <p-radioButton
+      name="toppingOption"
+      [value]="topping.nombre"
+      [(ngModel)]="toppingsSeleccionados"
+      [inputId]="topping.nombre"
+      (click)="asignarTopping(topping.precio, topping.nombre, $event)"
+    ></p-radioButton>
+    <label [for]="topping.nombre" >{{ topping.nombre }}</label>
+  </div>
+</div>
+          </div>
+          <div
+            class="flex align-items-center justify-content-between mt-2 mb-2 font-bold text-900"
+          >
+            Cantidad
+          </div>
+          <p-dropdown
+            [(ngModel)]="selectedValue"
+            [options]="dropdownOptions"
+            placeholder="0"
+            class="flex align-items-center justify-content-between"
+          ></p-dropdown>
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf="id_tamano"
+      class="row align-items-center justify-content-between font-bold text-900 ml-8 mt-2 mb-2"
+    >
+      Tamaño
+    </div>
+    <div class="row">
+      <div
+        *ngFor="let tamano of cantidad.tamanos; let i = index"
+        class="col-4 mb-2"
+        [class.col-6]="i >= 3"
+      >
+        <div *ngIf="id_tamano" class="flex justify-content-center">
+          <p-button
+            [style]="{
+              height: '60px',
+              color: '#11ABE1',
+              'border-color': '#11ABE1'
+            }"
+            styleClass="border-round flex align-items-center mx-1 w-full"
+            [label]="tamano.nombre"
+            [outlined]="true"
+            (click)="
+              asignarTamano(tamano.precio, tamano.nombre, tamano.id_tamanos)
+            "
+          >
+            <img
+              style="height: 50px; width: 50px"
+              src="{{ tamano.imagen }}"
+              alt=""
+            />
+          </p-button>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 mt-2">
+      <div class="grid">
+        <div class="col-12 flex justify-content-end">
+          <button
+            pButton
+            pRipple
+            class="w-full button1"
+            styleClass="border-round
+          w-full  border-none"
+            label="Agregar al carrito"
+            (click)="addToShoppingCart()"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-template #loading>
+  <div class="loading-spinner">
+    <p-progressSpinner
+      styleClass="w-4rem h-4rem flex align-items-center justify-content-center"
+      strokeWidth="8"
+      fill="var(--surface-ground)"
+      animationDuration=".5s"
+    />
+  </div>
+</ng-template>
